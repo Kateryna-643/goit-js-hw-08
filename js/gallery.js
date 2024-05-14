@@ -89,19 +89,14 @@ images.forEach(image => {
     galleryBox.appendChild(galleryItem);
 })
 
-galleryBox.addEventListener('click', handleGalleryClick);
-function handleGalleryClick(event) {
-    event.preventDefault();
-    if (event.target.nodeName !== 'IMG') {
-        return;
-    }
-    const largeImageUrl = event.target.dataset.source;
-    
-     const instance = BasicLightbox.create(`
-        <img src="${largeImageUrl}" width="800" height="600">
-    `);
+galleryBox.addEventListener('click', function (event) {
+    event.preventDefault(); 
 
-    instance.show();
-}
+    if (event.target.tagName === 'IMG') {
+        const originalSrc = event.target.dataset.source;
+        const lightbox = basicLightbox.create(`<img src="${originalSrc}" >`);
+        lightbox.show();
+    }
+});
 
 
